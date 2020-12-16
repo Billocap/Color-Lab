@@ -10,9 +10,7 @@ function HexCode({value, handler}) {
             setHexCode(value);
         },
         _ => {
-            if (hexcode.length >= 6) {
-                handler(hexcode);
-            }
+            if (hexcode.length >= 6) handler(hexcode);
         },
         [value, hexcode]
     );

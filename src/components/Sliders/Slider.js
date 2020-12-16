@@ -30,7 +30,7 @@ function Slider({id, label, value, handler, mode, background}) {
                 setRange({min: 0, max: 100});
             }
         }
-    }, [mode]);
+    }, [mode, label]);
 
     return (
         <div className="flexbox full-item">
@@ -48,8 +48,8 @@ function Slider({id, label, value, handler, mode, background}) {
             />
             <input
                 type="text"
-                value={slider}
-                onChange={e => setSlider(parseInt(e.target.value))}
+                value={slider || 0}
+                onChange={e => setSlider(parseInt(e.target.value) || 0)}
             />
         </div>
     );

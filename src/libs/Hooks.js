@@ -1,26 +1,10 @@
-import {useState, useEffect} from 'react';
-
-function useBundle(initialVal, varName, setName) {
-    const [state, setState] = useState(initialVal);
-
-    const bundle = {};
-
-    bundle[varName] = state;
-    bundle[setName] = setState;
-
-    return [state, setState, bundle];
-}
+import {useEffect} from 'react';
 
 function useInterface(innerFuntion, outterFunction, [innerValue, outterValue]) {
+    // eslint-disable-next-line
     useEffect( innerFuntion, [innerValue]);
+    // eslint-disable-next-line
     useEffect( outterFunction, [outterValue]);
 }
 
-const Hooks = {
-    useBundle,
-    useInterface
-}
-
-export default Hooks;
-
-export {useBundle, useInterface};
+export {useInterface};

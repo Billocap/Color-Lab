@@ -1,34 +1,3 @@
-/*
-clamp(value, min, max) {
-    if (value > max) {
-        return max;
-    } else if (value < min) {
-        return min;
-    } else {
-        return value;
-    }
-}
-
-function HSVtoRGB({h, s, v}) {
-    const hue = DegtoRad(h);
-    const sat = s / 100;
-    const val = v / 100;
-
-    const min = (1 - sat) * val;
-    const max = val;
-    
-    const a = sat * val;
-    const b = val * (1 - sat / 2);
-
-    const angle = DegtoRad(120);
-
-    return {
-        r: Math.round(clamp(Math.cos(hue) * a + b, min, max) * 255),
-        g: Math.round(clamp(Math.cos(hue - angle) * a + b, min, max) * 255),
-        b: Math.round(clamp(Math.cos(hue + angle) * a + b, min, max) * 255)
-    };
-}*/
-
 // Treats color as a vector with x, y, z coords;
 // x = r, y = g, z = b For RGB;
 // x = h, y = s, z = l For HSL;
@@ -199,17 +168,16 @@ const ColorMode = {
         };
     },
     multiTool(color, from, to) {
-        if (from != to) {
+        if (from !== to) {
             switch (from) {
                 case "RGB":
                     return to === "HSV" ? this.RGBtoHSV(color) : this.RGBtoHSL(color);
-                    break;
                 case "HSL":
                     return to === "RGB" ? this.HSLtoRGB(color) : this.HSLtoHSV(color);
-                    break;
                 case "HSV":
                     return to === "RGB" ? this.HSVtoRGB(color) : this.HSVtoHSL(color);
-                    break;
+                default:
+                    return color;
             }
         } else {
             return color;

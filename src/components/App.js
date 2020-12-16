@@ -1,16 +1,16 @@
-import React from 'react';
+import {React, useState} from 'react';
 
-import {useBundle, useInterface} from '../libs/Hooks';
+import {useInterface} from '../libs/Hooks';
 
 import Container from './Container';
 
 import Colorama from '../utils/Colorama';
 import ColorMode from '../utils/ColorMode';
 
-function App() {
-    const [hexcode, setHexCode, hexcodeBundle] = useBundle("DC143C", "hexcode", "setHexCode");
-    const [color, setColor, colorBundle] = useBundle(Colorama.HextoRGB(hexcode), "color", "setColor");
-    const [mode, setMode, modeBundle] = useBundle({prev: "RGB", now: "RGB"}, "mode", "setMode");
+function App({colorProp}) {
+    const [hexcode, setHexCode] = useState(colorProp.toHex());
+    const [color, setColor] = useState(Colorama.HextoRGB(hexcode));
+    const [mode, setMode] = useState({prev: "RGB", now: "RGB"});
 
     const style = {
         background: `#${hexcode}`
@@ -29,9 +29,9 @@ function App() {
     return (
         <div id="app" className="flexbox full-item" style={style}>
             <Container
-                hexcodeBundle={hexcodeBundle}
-                colorBundle={colorBundle}
-                modeBundle={modeBundle}
+                hexcodeBundle={{hexcode, setHexCode}}
+                colorBundle={{color, setColor}}
+                modeBundle={{mode, setMode}}
             />
         </div>
     );
