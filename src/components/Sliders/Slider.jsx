@@ -1,27 +1,34 @@
 import {React, useState, useEffect} from 'react';
 
 import {useInterface} from '../../libs/Hooks';
+import Colorama from '../../utils/Colorama';
 
-function Slider({id, label, value, handler, mode, background}) {
-    const [slider, setSlider] = useState(value);
+
+function Slider({channel, label, color, setColor}) {
+    const [slider, setSlider] = useState(color.getColor(channel));
     const [range, setRange] = useState({min: 0, max: 255});
 
     const style = {
-        background
+        background: Colorama.ModeGrad(
+            channel,
+            color.mode,
+            color.getColor(channel === "x" ? "y" : "x"),
+            color.getColor(channel === "z" ? "y" : "z")
+        )
     };
 
     useInterface(
         _ => {
-            setSlider(value);
+            setSlider(color.getColor(channel));
         },
         _ => {
-            handler(slider);
+            setColor(color => ({...color.setColor(slider, channel)}));
         },
-        [value, slider]
+        [color, slider]
     );
 
     useEffect( _ => {
-        if (mode.now === "RGB") {
+        if (color.mode === "RGB") {
             setRange({min: 0, max: 255});
         } else {
             if (label === "H") {
@@ -30,16 +37,16 @@ function Slider({id, label, value, handler, mode, background}) {
                 setRange({min: 0, max: 100});
             }
         }
-    }, [mode, label]);
+    }, [color, label]);
 
     return (
         <div className="flexbox full-item">
-            <label htmlFor={id} className="flexbox">
+            <label htmlFor={channel} className="flexbox">
                 {label}
             </label>
             <input
                 type="range"
-                id={id}
+                id={channel}
                 value={slider}
                 onChange={e => setSlider(parseInt(e.target.value))}
                 min={range.min}

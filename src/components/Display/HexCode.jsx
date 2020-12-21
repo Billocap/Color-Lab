@@ -2,17 +2,17 @@ import {React, useState} from 'react';
 
 import {useInterface} from '../../libs/Hooks';
 
-function HexCode({value, handler}) {
-    const [hexcode, setHexCode] = useState(value);
+function HexCode({color, setColor}) {
+    const [hexcode, setHexCode] = useState(color.toHex());
 
     useInterface(
         _ => {
-            setHexCode(value);
+            setHexCode(color.toHex());
         },
         _ => {
-            if (hexcode.length >= 6) handler(hexcode);
+            if (hexcode.length >= 6) setColor(color => ({...color.fromHex(hexcode)}));
         },
-        [value, hexcode]
+        [color, hexcode]
     );
 
     return (

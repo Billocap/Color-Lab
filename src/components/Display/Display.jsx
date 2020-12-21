@@ -2,14 +2,14 @@ import React from 'react';
 
 import HexCode from './HexCode';
 
-function Display({hexcode, setHexCode}) {
+function Display({color, setColor}) {
     const style = {
-        background: `#${hexcode}`
+        background: `#${color.toHex()}`
     };
 
     return (
         <div id="display" className="flexbox" style={style}>
-            <HexCode value={hexcode} handler={setHexCode} />
+            <HexCode color={color} setColor={setColor} />
         </div>
     );
 }

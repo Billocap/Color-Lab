@@ -2,27 +2,26 @@ import {React, useState} from 'react';
 
 import {useInterface} from '../../libs/Hooks';
 
-function Component({id, value, handler, background}) {
-    const [component, setComponent] = useState(value) 
+function Component({channel, color, setColor, background}) {
+    const [component, setComponent] = useState(color.asMode("RGB")[channel]);
     
     useInterface(
         _ => {
-            handler(component);
+            setColor(color_ => ({...color_.setColor(component, channel, "RGB")}));
         },
         _ => {
-            setComponent(value || 0);
+            setComponent(color.asMode("RGB")[channel] || 0);
         },
-        [component, value]
+        [component, color]
     );
 
     const style = {
-        background
+        background: background
     }
 
     return (
         <input
             type="text"
-            id={id}
             className="full-item"
             value={component}
             onChange={e => setComponent(parseInt(e.target.value) || 0)}

@@ -38,11 +38,11 @@ const Colorama = {
     },
     RGBGrad(channel, color1, color2) {
         switch (channel) {
-            case "red":
+            case "x":
                 return `linear-gradient(to right, ${this.rgb(0,color1,color2)}, ${this.rgb(255,color1,color2)})`;
-            case "green":
+            case "y":
                 return `linear-gradient(to right, ${this.rgb(color1,0,color2)}, ${this.rgb(color1,255,color2)})`;
-            case "blue":
+            case "z":
                 return `linear-gradient(to right, ${this.rgb(color1,color2,0)}, ${this.rgb(color1,color2,255)})`;
             default:
                 return "linear-gradient(to right,0,0)";
@@ -50,11 +50,11 @@ const Colorama = {
     },
     HSLGrad(channel, color1, color2) {
         switch (channel) {
-            case "red":
+            case "x":
                 return `linear-gradient(to right, ${this.hsl(0,color1,color2)}, ${this.hsl(60,color1,color2)}, ${this.hsl(120,color1,color2)}, ${this.hsl(180,color1,color2)}, ${this.hsl(240,color1,color2)}, ${this.hsl(300,color1,color2)}, ${this.hsl(360,color1,color2)})`;
-            case "green":
+            case "y":
                 return `linear-gradient(to right, ${this.hsl(color1,0,color2)}, ${this.hsl(color1,100,color2)})`;
-            case "blue":
+            case "z":
                 return `linear-gradient(to right, ${this.hsl(color1,color2,0)}, ${this.hsl(color1,color2,50)}, ${this.hsl(color1,color2,100)})`;
             default:
                 return "linear-gradient(to right,0,0)";
@@ -64,11 +64,11 @@ const Colorama = {
         const {HSVtoHSL} = ColorMode;
 
         switch (channel) {
-            case "red":
+            case "x":
                 return `linear-gradient(to right, ${this.hsl(HSVtoHSL({x:0,y:color1,z:color2}))}, ${this.hsl(HSVtoHSL({x:60,y:color1,z:color2}))}, ${this.hsl(HSVtoHSL({x:120,y:color1,z:color2}))}, ${this.hsl(HSVtoHSL({x:180,y:color1,z:color2}))}, ${this.hsl(HSVtoHSL({x:240,y:color1,z:color2}))}, ${this.hsl(HSVtoHSL({x:300,y:color1,z:color2}))}, ${this.hsl(HSVtoHSL({x:360,y:color1,z:color2}))})`;
-            case "green":
+            case "y":
                 return `linear-gradient(to right, ${this.hsl(HSVtoHSL({x:color1,y:0,z:color2}))}, ${this.hsl(HSVtoHSL({x:color1,y:100,z:color2}))})`;
-            case "blue":
+            case "z":
                 return `linear-gradient(to right, ${this.hsl(HSVtoHSL({x:color1,y:color2,z:0}))}, ${this.hsl(HSVtoHSL({x:color1,y:color2,z:100}))})`;
             default:
                 return "linear-gradient(to right,0,0)";
